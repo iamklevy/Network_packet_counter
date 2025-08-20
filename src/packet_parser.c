@@ -17,6 +17,7 @@ int get_packet_protocol(const u_char *packet) {
     const struct ip *ip_header = (struct ip *)(packet + sizeof(struct ether_header));
 
 
+    // return matching protocol constant integer
     switch (ip_header->ip_p) {
         case IPPROTO_TCP: return IPPROTO_TCP;
         case IPPROTO_UDP: return IPPROTO_UDP;
@@ -31,10 +32,10 @@ void process_packet(const u_char *packet, packet_stats_t *packet_stats) {
     const int protocol = get_packet_protocol(packet);
 
     switch (protocol) {
-        case IPPROTO_TCP: packet_stats->tcp_count++;
-        case IPPROTO_UDP: packet_stats->udp_count++;
-        case IPPROTO_ICMP: packet_stats->icmp_count++;
-        default: packet_stats->other_count++;
+        case IPPROTO_TCP: packet_stats->tcp_count++; break;
+        case IPPROTO_UDP: packet_stats->udp_count++; break;
+        case IPPROTO_ICMP: packet_stats->icmp_count++; break;
+        default: packet_stats->other_count++; break;
     }
 }
 
