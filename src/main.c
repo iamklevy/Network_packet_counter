@@ -6,8 +6,8 @@
 #include <unistd.h>
 #include <time.h>
 
-static packet_stats_t stats;
-static pcap_t *handle = NULL;
+static packet_stats_t *stats;
+static pcap_t *handle = NULL; //libpcap session pointer.
 static int interval = 5; //default interval; stats every 5 seconds.
 
 void handle_sigint(const int sig) {
@@ -17,8 +17,8 @@ void handle_sigint(const int sig) {
 }
 
 void packet_handler(u_char *user, const struct pcap_pkthdr *h, const u_char *bytes) {
-    (void)h;
-    packet_stats_t *stats = (packet_stats_t*)user;
+    (void)h; //ignore the packet header (we're only interested in Raw Bytes)
+    stats = (packet_stats_t*)user;
     process_packet(bytes, stats);
 }
 
