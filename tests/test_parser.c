@@ -1,17 +1,21 @@
 #include "../include/packet_parser.h"
-#include "../src/packet_parser.c"
+#include "../src//packet_parser.c"
 #include <stdio.h>
 
-// Dummy test (you can expand with crafted packet data)
-int main() {
-    packet_stats_t stats = {4,0,0,0};
 
-    // Fake empty packet (not real)
+
+//Expected output (since fake packet is not a real IP packet, it counts as “Other”):
+int main() {
+    // Initialize stats
+    packet_stats_t stats = {0, 0, 0, 0};
+
+    // fake packet (content doesn't matter here)
     unsigned char fake_packet[64] = {0};
 
+    // Process the packet
     process_packet(fake_packet, &stats);
 
-    printf("After processing fake packet:\n");
+    // Print the updated stats
     print_stats(&stats);
 
     return 0;
