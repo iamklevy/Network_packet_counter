@@ -64,4 +64,23 @@ sudo setcap cap_net_raw,cap_net_admin=eip ./packet_counter
 * Works on Linux with actual network interfaces.
 * Designed to handle at least 1000 packets/sec with memory usage under 10MB.
 
+# RunTime screenshots/logs
+**1. pcap on wlan0 interface with filtering only TCP**
+<img width="1920" height="1080" alt="wlan0 every 3sec only TCP" src="https://github.com/user-attachments/assets/345ae6cb-bb2a-4712-b44f-b0f8edd3fa8b" />
+
+**2. stress test with ping flood**
+<img width="1920" height="1080" alt="stress_test2" src="https://github.com/user-attachments/assets/45a645df-e708-477a-b2d4-bb7557352f70" />
+
+**3. Zero packet loss after stress Test**
+<img width="1920" height="1080" alt="stress_test1" src="https://github.com/user-attachments/assets/a9a507c9-f1bd-4978-a514-fc4c330de627" />
+
+**4. Memory usage for the program Executable (~4-5 MB)**
+<img width="1920" height="1080" alt="mem usage 4 5 MiB" src="https://github.com/user-attachments/assets/16f49596-83b9-452e-bc9c-43e8c3ec285a" />
+
+**5.Testing eth0 interface on Raspberrypi5**
+![RPI5](https://github.com/user-attachments/assets/4ff24d40-bcd5-4516-b388-e197e3e0102b)
+
+
+
+
 
