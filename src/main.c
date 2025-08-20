@@ -7,13 +7,30 @@
 #include <time.h>
 
 static packet_stats_t stats;
+struct pcap_stat termination_stats;
 static pcap_t *handle = NULL; //libpcap session pointer.
 static int interval = 5; //default interval; stats every 5 seconds.
 
+//displaying pcap performance stats after program termination
+void print_pcap_stats() {
+    if (pcap_stats(handle, &termination_stats) == 0) {
+        printf("Packets received: %u\n", termination_stats.ps_recv);
+        printf("Packets dropped (by libpcap): %u\n", termination_stats.ps_drop);
+        printf("Packets dropped (by interface): %u\n", termination_stats.ps_ifdrop);
+    } else {
+        fprintf(stderr, "Error getting stats: %s\n", pcap_geterr(handle));
+    }
+}
+
+// handling program Termination (CTRL+C)
 void handle_sigint(const int sig) {
-    (void)sig;
+    (void)sig; //silence compiler warnings
     printf("\nStopping capture...\n");
-    if (handle) pcap_breakloop(handle);
+    if (handle) {
+        pcap_breakloop(handle);
+        print_pcap_stats();
+    }
+
 }
 
 void packet_handler(u_char *user, const struct pcap_pkthdr *h, const u_char *bytes) {
