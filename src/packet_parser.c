@@ -13,7 +13,7 @@ int get_packet_protocol(const u_char *packet) {
         return 0; // Other
     }
 
-    //packets starts with an Ethernet header,  Move past it to reach IP header
+    //packets starts with an Ethernet header,  Move past it to reach IP header.
     const struct ip *ip_header = (struct ip *)(packet + sizeof(struct ether_header));
 
 
